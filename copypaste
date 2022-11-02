@@ -7,7 +7,22 @@
 
 install.packages("Bibliometrix")
 require(bibliometrix)
+# Download VOSviewer -> https://www.vosviewer.com/download -> https://www.vosviewer.com/downloads/VOSviewer_1.6.18_jar.zip
+# setwd("c:/Users/?USERNAME?/DOCUMENTS")
+# extract VOSviewer.jar to R working Directory
 #######################
+
+Point & Click Interface 
+#######################
+
+biblioshiny()
+#############
+
+
+########################################
+#### Bibliometrix in R or R Studio ####
+#######################################
+
 
 # importing data #
 ##################
@@ -16,11 +31,26 @@ SCPS_DF=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
 
 SCPS_DF=convert2df(file="c:/Users/fletchem/Documents/", dbsource = "scopus", format = "bibtex")
 
-sysr02=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
 
+
+##################
 ENTINN=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
 
 biblio_inno=biblioAnalysis(ENTINN, sep = ";")
+
+
+
+
+
+
+
+
+### thematic map ####
+
+
+Rmv_Terms=c("limited trading", "informa uk", "uk limited", "media llc")
+Rmv_Terms=c("results","review","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose","article","human","female","male")
+
 
 INN_THEMATIC=thematicMap(
   ENTINN,
@@ -37,11 +67,6 @@ INN_THEMATIC=thematicMap(
   synonyms = NULL,
   cluster = "walktrap"
 )
-
-Rmv_Terms=c("limited trading", "informa uk", "uk limited", "media llc")
-
-
-THEMATIC_WORDS=as.data.frame(INN_THEMATIC$map$data$words)
 
 
 THEME_PLOT=plot(INN_THEMATIC$map)
@@ -82,78 +107,13 @@ networkPlot(
 
 
 
-
-
-
-
-
-#innovation dataset ############
-m=convert2df(file = "Z:/Documents/InnovQm.xlsx", dbsource = "wos", format = "excel")
-
-bib_inno=biblioAnalysis(InnovQm, sep = ";")
-abstracts=data.frame()
 ####################################
-
-rownames(M) <- NULL
-new_df <- df[-c(2, 3, 4), ]
-
-XIE J, 2021, 1
-
-grep("K", rv)
-
-
-matches <- unique (grep(paste(toMatch,collapse="|"), 
-                        myfile$Letter, value=TRUE))
-DF.new <- subset(DF, rownames== c("12" , "16"))
-row.names(df)
-DF.new <- subset(M, rownames==c("AKBAR MB, 2021, 1","ANDERSEN TM, 2021, 1","BICKLEY SJ, 2021, 1","BLASCH J, 2021, 1","BUCK M, 2021, 1","CHAUDHURI A, 2021, 1","DAVIDSON KA, 2021, 1","DOLD MF, 2021, 1","EBER N, 2021, 1","ESPINOSA VI, 2021, 1","FABBRI M, 2021, 1","FOCHMANN M, 2021, 1","GEYER R, 2021, 1","HOMONOFF T, 2021, 1","ISLER O, 2021, 1","KAUR N, 2021, 1","KIRSANOV I, 2021, 1","KOLODKO GW, 2021, 1","LADES LK, 2021, 1","LITTLECHILD S, 2021, 1","MAŁECKA M, 2021, 1","NELSON JA, 2021, 1","PARK H, 2021, 1","PEART SJ, 2021, 1","ROBINSON PJ, 2021, 1","SAINI A, 2021, 1","SÁNCHEZ-BAYÓN A, 2021, 1","VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1"))
-
-DF.new <- subset(M, rownames!=c("VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1"))
-
-DF.new <-subset(M, grepl("AKBAR MB, 2021, "| "ANDERSEN TM, 2021, "| "BICKLEY SJ, 2021, "| "BLASCH J, 2021, "| "BUCK M, 2021, "| "CHAUDHURI A, 2021, "| "DAVIDSON KA, 2021, "| "DOLD MF, 2021, "| "EBER N, 2021, "| "ESPINOSA VI, 2021, "| "FABBRI M, 2021, "| "FOCHMANN M, 2021, "| "GEYER R, 2021, "| "HOMONOFF T, 2021, "| "ISLER O, 2021, "| "KAUR N, 2021, "| "KIRSANOV I, 2021, "| "KOLODKO GW, 2021, "| "LADES LK, 2021, "| "LITTLECHILD S, 2021, "| "MAŁECKA M, 2021, "| "NELSON JA, 2021, "| "PARK H, 2021, "| "PEART SJ, 2021, "| "ROBINSON PJ, 2021, "| "SAINI A, 2021, "| "SÁNCHEZ-BAYÓN A, 2021, "| "VOSLINSKY A, 2021, "| "WANG P, 2021, "| "XIE J, 2021, ", row.names(M),value = TRUE)
-
-grepl("AKBAR MB, 2021,|ANDERSEN TM, 2021,|BICKLEY SJ, 2021,|BLASCH J, 2021,|BUCK M, 2021,|CHAUDHURI A, 2021,|DAVIDSON KA, 2021,|DOLD MF, 2021,|EBER N, 2021,|ESPINOSA VI, 2021,|FABBRI M, 2021,|FOCHMANN M, 2021,|GEYER R, 2021,|HOMONOFF T, 2021,|ISLER O, 2021,|KAUR N, 2021,|KIRSANOV I, 2021,|KOLODKO GW, 2021,|LADES LK, 2021,|LITTLECHILD S, 2021,|MAŁECKA M, 2021,|NELSON JA, 2021,|PARK H, 2021,|PEART SJ, 2021,|ROBINSON PJ, 2021,|SAINI A, 2021,|SÁNCHEZ-BAYÓN A, 2021,|VOSLINSKY A, 2021,|WANG P, 2021,|XIE J, 2021," , row.names(M),value = TRUE))
-
-subset(M,rownames==M[!grepl("AKBAR MB, 2021,", fixed=TRUE, row.names(M)),])
 
 
 ###################################################
-row_names_df_to_remove<-c("AKBAR MB, 2021, 1","ANDERSEN TM, 2021, 1","BICKLEY SJ, 2021, 1","BLASCH J, 2021, 1","BUCK M, 2021, 1","CHAUDHURI A, 2021, 1","DAVIDSON KA, 2021, 1","DOLD MF, 2021, 1","EBER N, 2021, 1","ESPINOSA VI, 2021, 1","FABBRI M, 2021, 1","FOCHMANN M, 2021, 1","GEYER R, 2021, 1","HOMONOFF T, 2021, 1","ISLER O, 2021, 1","KAUR N, 2021, 1","KIRSANOV I, 2021, 1","KOLODKO GW, 2021, 1","LADES LK, 2021, 1","LITTLECHILD S, 2021, 1","MAŁECKA M, 2021, 1","NELSON JA, 2021, 1","PARK H, 2021, 1","PEART SJ, 2021, 1","ROBINSON PJ, 2021, 1","SAINI A, 2021, 1","SÁNCHEZ-BAYÓN A, 2021, 1","VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1")
 
-X=M[!(row.names(M) %in% row_names_df_to_remove),]
-
-
-
-grepl("XIE J, 2021,", row.names(M),value = TRUE)
-
-"AKBAR MB, 2021,|ANDERSEN TM, 2021,|BICKLEY SJ, 2021,|BLASCH J, 2021,|BUCK M, 2021,|CHAUDHURI A, 2021,|DAVIDSON KA, 2021,|DOLD MF, 2021,|EBER N, 2021,|ESPINOSA VI, 2021,|FABBRI M, 2021,|FOCHMANN M, 2021,|GEYER R, 2021,|HOMONOFF T, 2021,|ISLER O, 2021,|KAUR N, 2021,|KIRSANOV I, 2021,|KOLODKO GW, 2021,|LADES LK, 2021,|LITTLECHILD S, 2021,|MAŁECKA M, 2021,|NELSON JA, 2021,|PARK H, 2021,|PEART SJ, 2021,|ROBINSON PJ, 2021,|SAINI A, 2021,|SÁNCHEZ-BAYÓN A, 2021,|VOSLINSKY A, 2021,|WANG P, 2021,|XIE J, 2021,"                 
-
-                 iris %>% select(!ends_with("Width"))
-                 
-"AKBAR MB, 2021, 1","ANDERSEN TM, 2021, 1","BICKLEY SJ, 2021, 1","BLASCH J, 2021, 1","BUCK M, 2021, 1","CHAUDHURI A, 2021, 1","DAVIDSON KA, 2021, 1","DOLD MF, 2021, 1","EBER N, 2021, 1","ESPINOSA VI, 2021, 1","FABBRI M, 2021, 1","FOCHMANN M, 2021, 1","GEYER R, 2021, 1","HOMONOFF T, 2021, 1","ISLER O, 2021, 1","KAUR N, 2021, 1","KIRSANOV I, 2021, 1","KOLODKO GW, 2021, 1","LADES LK, 2021, 1","LITTLECHILD S, 2021, 1","MAŁECKA M, 2021, 1","NELSON JA, 2021, 1","PARK H, 2021, 1","PEART SJ, 2021, 1","ROBINSON PJ, 2021, 1","SAINI A, 2021, 1","SÁNCHEZ-BAYÓN A, 2021, 1","VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1"
-                 
-
-
-X <- mergeDbSources(sysr01,sysr02, remove.duplicated=TRUE)
-
-
-
-
-saveRDS(M,file="c:/Users/fletchem/Documents/bibliometrix.rds")
-
-rownames(X) = make.names(X$DE, unique=TRUE)
 #############################################################################
-pdfs=list.files(path = "z:/Documents/sample_pdfs_delete_afer_test/",pattern = "*.pdf", full.names = TRUE)
 
-library(httr)
-library(jsonlite)
-
-
-
-curl -X POST --header "Authorization: Bearer <your token>" -F "file=@/path/to/file.pdf;type=application/pdf" /api/keywords/extract
-
->> data = fromJSON(rawToChar(res$content))
->> names(data)
 ########################################################################################
 rownames(M) = make.names(M$AU, unique=TRUE)
 
@@ -162,7 +122,6 @@ bibanal=biblioAnalysis(X, sep = ";")
 rownames(M)<-NULL
 
 
-remove_terms=c("results","review","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose","article","human","female","male")
 
 
 binet=biblioNetwork( M, analysis="co-occurrences", network = "abstracts", n = NULL, sep = ";", short = FALSE, shortlabel = TRUE, remove.terms = remove_terms, synonyms = NULL )
