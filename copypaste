@@ -1,0 +1,338 @@
+##############################
+### Bibliometrix Workshop ####
+##############################
+
+# cran package install #
+########################
+
+install.packages("Bibliometrix")
+require(bibliometrix)
+#######################
+
+# importing data #
+##################
+
+SCPS_DF=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
+
+SCPS_DF=convert2df(file="c:/Users/fletchem/Documents/", dbsource = "scopus", format = "bibtex")
+
+sysr02=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
+
+ENTINN=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
+
+biblio_inno=biblioAnalysis(ENTINN, sep = ";")
+
+INN_THEMATIC=thematicMap(
+  ENTINN,
+  field = "AB",
+  n = 1000,
+  minfreq = 10,
+  ngrams = 2,
+  stemming = FALSE,
+  size = 0.1,
+  n.labels = 10,
+  community.repulsion = 0.5,
+  repel = TRUE,
+  remove.terms = Rmv_Terms,
+  synonyms = NULL,
+  cluster = "walktrap"
+)
+
+Rmv_Terms=c("limited trading", "informa uk", "uk limited", "media llc")
+
+
+THEMATIC_WORDS=as.data.frame(INN_THEMATIC$map$data$words)
+
+
+THEME_PLOT=plot(INN_THEMATIC$map)
+
+conv=as.ggplot(THEME_PLOT)
+
+
+
+
+networkPlot(
+  INN_THEMATIC,
+  normalize = NULL,
+  n = 100,
+  degree = NULL,
+  Title = "Plot",
+  type = "auto",
+  label = TRUE,
+  labelsize = 1,
+  label.cex = FALSE,
+  label.color = FALSE,
+  label.n = NULL,
+  halo = FALSE,
+  cluster = "leading_eigen",
+  community.repulsion = 0.1,
+  vos.path = NULL,
+  size = 3,
+  size.cex = FALSE,
+  curved = FALSE,
+  noloops = TRUE,
+  remove.multiple = TRUE,
+  remove.isolates = FALSE,
+  weighted = NULL,
+  edgesize = 1,
+  edges.min = 0,
+  alpha = 0.5,
+  verbose = TRUE
+)
+
+
+
+
+
+
+
+
+#innovation dataset ############
+m=convert2df(file = "Z:/Documents/InnovQm.xlsx", dbsource = "wos", format = "excel")
+
+bib_inno=biblioAnalysis(InnovQm, sep = ";")
+abstracts=data.frame()
+####################################
+
+rownames(M) <- NULL
+new_df <- df[-c(2, 3, 4), ]
+
+XIE J, 2021, 1
+
+grep("K", rv)
+
+
+matches <- unique (grep(paste(toMatch,collapse="|"), 
+                        myfile$Letter, value=TRUE))
+DF.new <- subset(DF, rownames== c("12" , "16"))
+row.names(df)
+DF.new <- subset(M, rownames==c("AKBAR MB, 2021, 1","ANDERSEN TM, 2021, 1","BICKLEY SJ, 2021, 1","BLASCH J, 2021, 1","BUCK M, 2021, 1","CHAUDHURI A, 2021, 1","DAVIDSON KA, 2021, 1","DOLD MF, 2021, 1","EBER N, 2021, 1","ESPINOSA VI, 2021, 1","FABBRI M, 2021, 1","FOCHMANN M, 2021, 1","GEYER R, 2021, 1","HOMONOFF T, 2021, 1","ISLER O, 2021, 1","KAUR N, 2021, 1","KIRSANOV I, 2021, 1","KOLODKO GW, 2021, 1","LADES LK, 2021, 1","LITTLECHILD S, 2021, 1","MAŁECKA M, 2021, 1","NELSON JA, 2021, 1","PARK H, 2021, 1","PEART SJ, 2021, 1","ROBINSON PJ, 2021, 1","SAINI A, 2021, 1","SÁNCHEZ-BAYÓN A, 2021, 1","VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1"))
+
+DF.new <- subset(M, rownames!=c("VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1"))
+
+DF.new <-subset(M, grepl("AKBAR MB, 2021, "| "ANDERSEN TM, 2021, "| "BICKLEY SJ, 2021, "| "BLASCH J, 2021, "| "BUCK M, 2021, "| "CHAUDHURI A, 2021, "| "DAVIDSON KA, 2021, "| "DOLD MF, 2021, "| "EBER N, 2021, "| "ESPINOSA VI, 2021, "| "FABBRI M, 2021, "| "FOCHMANN M, 2021, "| "GEYER R, 2021, "| "HOMONOFF T, 2021, "| "ISLER O, 2021, "| "KAUR N, 2021, "| "KIRSANOV I, 2021, "| "KOLODKO GW, 2021, "| "LADES LK, 2021, "| "LITTLECHILD S, 2021, "| "MAŁECKA M, 2021, "| "NELSON JA, 2021, "| "PARK H, 2021, "| "PEART SJ, 2021, "| "ROBINSON PJ, 2021, "| "SAINI A, 2021, "| "SÁNCHEZ-BAYÓN A, 2021, "| "VOSLINSKY A, 2021, "| "WANG P, 2021, "| "XIE J, 2021, ", row.names(M),value = TRUE)
+
+grepl("AKBAR MB, 2021,|ANDERSEN TM, 2021,|BICKLEY SJ, 2021,|BLASCH J, 2021,|BUCK M, 2021,|CHAUDHURI A, 2021,|DAVIDSON KA, 2021,|DOLD MF, 2021,|EBER N, 2021,|ESPINOSA VI, 2021,|FABBRI M, 2021,|FOCHMANN M, 2021,|GEYER R, 2021,|HOMONOFF T, 2021,|ISLER O, 2021,|KAUR N, 2021,|KIRSANOV I, 2021,|KOLODKO GW, 2021,|LADES LK, 2021,|LITTLECHILD S, 2021,|MAŁECKA M, 2021,|NELSON JA, 2021,|PARK H, 2021,|PEART SJ, 2021,|ROBINSON PJ, 2021,|SAINI A, 2021,|SÁNCHEZ-BAYÓN A, 2021,|VOSLINSKY A, 2021,|WANG P, 2021,|XIE J, 2021," , row.names(M),value = TRUE))
+
+subset(M,rownames==M[!grepl("AKBAR MB, 2021,", fixed=TRUE, row.names(M)),])
+
+
+###################################################
+row_names_df_to_remove<-c("AKBAR MB, 2021, 1","ANDERSEN TM, 2021, 1","BICKLEY SJ, 2021, 1","BLASCH J, 2021, 1","BUCK M, 2021, 1","CHAUDHURI A, 2021, 1","DAVIDSON KA, 2021, 1","DOLD MF, 2021, 1","EBER N, 2021, 1","ESPINOSA VI, 2021, 1","FABBRI M, 2021, 1","FOCHMANN M, 2021, 1","GEYER R, 2021, 1","HOMONOFF T, 2021, 1","ISLER O, 2021, 1","KAUR N, 2021, 1","KIRSANOV I, 2021, 1","KOLODKO GW, 2021, 1","LADES LK, 2021, 1","LITTLECHILD S, 2021, 1","MAŁECKA M, 2021, 1","NELSON JA, 2021, 1","PARK H, 2021, 1","PEART SJ, 2021, 1","ROBINSON PJ, 2021, 1","SAINI A, 2021, 1","SÁNCHEZ-BAYÓN A, 2021, 1","VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1")
+
+X=M[!(row.names(M) %in% row_names_df_to_remove),]
+
+
+
+grepl("XIE J, 2021,", row.names(M),value = TRUE)
+
+"AKBAR MB, 2021,|ANDERSEN TM, 2021,|BICKLEY SJ, 2021,|BLASCH J, 2021,|BUCK M, 2021,|CHAUDHURI A, 2021,|DAVIDSON KA, 2021,|DOLD MF, 2021,|EBER N, 2021,|ESPINOSA VI, 2021,|FABBRI M, 2021,|FOCHMANN M, 2021,|GEYER R, 2021,|HOMONOFF T, 2021,|ISLER O, 2021,|KAUR N, 2021,|KIRSANOV I, 2021,|KOLODKO GW, 2021,|LADES LK, 2021,|LITTLECHILD S, 2021,|MAŁECKA M, 2021,|NELSON JA, 2021,|PARK H, 2021,|PEART SJ, 2021,|ROBINSON PJ, 2021,|SAINI A, 2021,|SÁNCHEZ-BAYÓN A, 2021,|VOSLINSKY A, 2021,|WANG P, 2021,|XIE J, 2021,"                 
+
+                 iris %>% select(!ends_with("Width"))
+                 
+"AKBAR MB, 2021, 1","ANDERSEN TM, 2021, 1","BICKLEY SJ, 2021, 1","BLASCH J, 2021, 1","BUCK M, 2021, 1","CHAUDHURI A, 2021, 1","DAVIDSON KA, 2021, 1","DOLD MF, 2021, 1","EBER N, 2021, 1","ESPINOSA VI, 2021, 1","FABBRI M, 2021, 1","FOCHMANN M, 2021, 1","GEYER R, 2021, 1","HOMONOFF T, 2021, 1","ISLER O, 2021, 1","KAUR N, 2021, 1","KIRSANOV I, 2021, 1","KOLODKO GW, 2021, 1","LADES LK, 2021, 1","LITTLECHILD S, 2021, 1","MAŁECKA M, 2021, 1","NELSON JA, 2021, 1","PARK H, 2021, 1","PEART SJ, 2021, 1","ROBINSON PJ, 2021, 1","SAINI A, 2021, 1","SÁNCHEZ-BAYÓN A, 2021, 1","VOSLINSKY A, 2021, 1","WANG P, 2021, 1","XIE J, 2021, 1"
+                 
+
+
+X <- mergeDbSources(sysr01,sysr02, remove.duplicated=TRUE)
+
+
+
+
+saveRDS(M,file="c:/Users/fletchem/Documents/bibliometrix.rds")
+
+rownames(X) = make.names(X$DE, unique=TRUE)
+#############################################################################
+pdfs=list.files(path = "z:/Documents/sample_pdfs_delete_afer_test/",pattern = "*.pdf", full.names = TRUE)
+
+library(httr)
+library(jsonlite)
+
+
+
+curl -X POST --header "Authorization: Bearer <your token>" -F "file=@/path/to/file.pdf;type=application/pdf" /api/keywords/extract
+
+>> data = fromJSON(rawToChar(res$content))
+>> names(data)
+########################################################################################
+rownames(M) = make.names(M$AU, unique=TRUE)
+
+bibanal=biblioAnalysis(X, sep = ";")
+
+rownames(M)<-NULL
+
+
+remove_terms=c("results","review","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose","article","human","female","male")
+
+
+binet=biblioNetwork( M, analysis="co-occurrences", network = "abstracts", n = NULL, sep = ";", short = FALSE, shortlabel = TRUE, remove.terms = remove_terms, synonyms = NULL )
+
+row.names(M)[3414] <- "BICKLEY SJ, 2021a,"
+
+ROWNAMESREFERENCE = as.data.frame(row.names(M))
+#################################################################
+require(dplyr)
+M_AB_FILTERED = M %>% filter(!is.na(AB))
+
+nrow(distinct(M))
+
+M_AB_FILTERED= distinct(M_AB_FILTERED, TI)
+remove_terms=c("authors","comparative study", "controlled study","results","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose")
+
+
+AB=as.data.frame(X$AB)
+
+colnames(AB)[1] <- "AB"
+names(combined)[26] <- "TI_TM"
+
+
+M_TI=termExtraction(
+  X,
+  Field = "TI",
+  ngrams = 2,
+  stemming = FALSE,
+  language = "english",
+  remove.numbers = TRUE,
+  remove.terms = remove_terms,
+  keep.terms = NULL,
+  synonyms = NULL,
+  verbose = TRUE
+)
+M_AB=termExtraction(
+  X,
+  Field = "AB",
+  ngrams = 2,
+  stemming = FALSE,
+  language = "english",
+  remove.numbers = TRUE,
+  remove.terms = remove_terms,
+  keep.terms = NULL,
+  synonyms = NULL,
+  verbose = TRUE
+)
+
+combined=readRDS(file.choose())
+
+combined=cbind(M_AB,M_TI$TI_TM)
+names(combined)[26] <- "TI_TM"
+
+
+
+
+
+
+bibnet_AB_COcurr=biblioNetwork(
+  M_AB,
+  analysis = "co-occurrences",
+  network = "keywords",
+  n = NULL,
+  sep = ";",
+  short = FALSE,
+  shortlabel = TRUE,
+  remove.terms = NULL,
+  synonyms = NULL
+)
+
+
+combined=cbind(M_AB,M_TI$TI_TM)
+names(combined)[26] <- "TI_TM"
+
+
+saveRDS(combined, file = "combinedRDS.rds")
+combined=readRDS(file.choose())
+vos_plot=networkPlot(
+  bibnet_AB_COcurr,
+  normalize = NULL,
+  n = NULL,
+  degree = NULL,
+  Title = "Plot",
+  type = "auto",
+  label = TRUE,
+  labelsize = 0.1,
+  label.cex = FALSE,
+  label.color = FALSE,
+  label.n = TRUE,
+  halo = FALSE,
+  cluster = "leading_eigen",
+  community.repulsion = 0.1,
+  vos.path = NULL,
+  size = 1,
+  size.cex = FALSE,
+  curved = TRUE,
+  noloops = TRUE,
+  remove.multiple = TRUE,
+  remove.isolates = TRUE,
+  weighted = TRUE,
+  edgesize = 1,
+  edges.min = 2,
+  alpha = 0.5,
+  verbose = TRUE
+)
+
+
+cple_map=couplingMap(
+  combined,
+  analysis = "documents",
+  field = "AB",
+  n = 3769,
+  label.term = "DE",
+  ngrams = 2,
+  impact.measure = "local",
+  minfreq = 75,
+  stemming = FALSE,
+  size = 0.1,
+  n.labels = 1,
+  repel = TRUE
+)
+pdf("rplotxxxxx.pdf") 
+
+write_graph(
+  cple_map$net$graph,
+  "c:/Users/fletchem/Documents/pajek",
+  format = c("pajek"))
+
+
+theme_map=thematicMap(
+  combined,
+  field = "AB_TM",
+  n = 50,
+  minfreq = 4,
+  ngrams = 2,
+  stemming = FALSE,
+  size = 0.5,
+  n.labels = 10,
+  repel = TRUE,
+  remove.terms = remove_terms,
+  synonyms = NULL,
+  cluster = "leading_eigen"
+)
+
+
+plotted=plot(cple_map$net$graph)
+dev.off() 
+
+pajek=as.data.frame(cple_map$net$graph_pajek)
+ggsave("graph.pdf", lastwidth = 16, height = 20, units = "in")
+############################################
+# library(dplyr)
+# library(tidyr)
+# combinedtwo %>%
+#   mutate_at(vars(ID,DE), na_if, y = "") %>%
+#   fill(ID,DE)
+# 
+# %>%
+#   group_by(SR) %>%
+#   mutate(condition = row_number())
+
+combinedtwo=data.frame(combined)
+
+combinedtwo <- combinedtwo %>% mutate(ID = ifelse(ID %in% "NA", AB_TM, ID))
+
+combinedtwo$DE <- ifelse(is.na(combinedtwo$DE), combined$AB_TM, combinedtwo$DE)
+
+combinedtwo$ID <- ifelse(is.na(combinedtwo$ID), combined$TI_TM, combinedtwo$ID)
+
+
+##################### sample search string ##############################################################
+########################################################################################################
+"entrepreneur"  OR  "new venture"  OR  "new firm"  OR  "new enterprise"  OR  "startup"  OR  "start-up"  OR  "SME"  OR  "small firm"  OR  "small and medium-sized enterprise"  OR  "micro and small business"  OR  "firm formation"  OR  "scale-up"  OR  "scaleup"  OR  "stand-up"  OR  "business model"  OR  "scalable business model"  OR  "experimentation"  OR  "lean method"  OR  "lean startup"  OR  "disruption orient"  OR  "growth oriented"  OR  "entrepreneurial firm"  OR  "nascent entrepreneur"  OR  "unicorn"  OR  "digital entrepreneur"  OR  "digital startup" "institution*"  OR  "institution* void*"  OR  "cultur*"  OR  "normative"  OR  "regulatory"  OR  "resource*"  OR  "institution* gap*"  OR  "institution* failure"  OR  "market failure*"  OR  "intermedia*"  OR  "sponsor*"  OR  "external factor*"  OR  "barrier*"  OR  "constraint*"  OR  "founding environment*"  OR  "resource* gap*"  OR  "resource* scarcit*"  OR  "resource* munificen*"  OR  "accelerator*"  OR  "incubator*"  OR  "co?working space*"  OR  "financ*"  OR  "venture capital*"  OR  "angel investor*"  OR  "crowdfunding*"  OR  "human capital"  OR  "science park*"  OR  "entrepreneur* ecosystem*"  OR  "startup ecosystem"  OR  "start-up ecosystem"  OR  "family business*"  OR  "family-owned business*"  OR  "business group*"  OR  "returnee entrepreneur*"  OR  "transnational entrepreneur*"  OR  "entrepreneur* education"  OR  "mentor*"  OR  "knowledge spill-over*" 
