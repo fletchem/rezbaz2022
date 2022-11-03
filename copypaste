@@ -5,7 +5,7 @@
 # cran package install #
 ########################
 
-install.packages("Bibliometrix")
+install.packages("bibliometrix")
 require(bibliometrix)
 # Download VOSviewer -> https://www.vosviewer.com/download -> https://www.vosviewer.com/downloads/VOSviewer_1.6.18_jar.zip
 # setwd("c:/Users/?USERNAME?/DOCUMENTS")
