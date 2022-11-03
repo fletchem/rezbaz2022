@@ -39,43 +39,15 @@ ENTINN=convert2df(file=file.choose(), dbsource = "scopus", format = "bibtex")
 
 biblio_inno=biblioAnalysis(ENTINN, sep = ";")
 
+#############################################
+############### biblionetwork ###############
+#############################################
 
+binet=biblioNetwork( M, analysis="co-occurrences", network = "abstracts", n = NULL, sep = ";", short = FALSE, shortlabel = TRUE, remove.terms = remove_terms, synonyms = NULL )
 
-
-
-
-
-
-### thematic map ####
-
-
-Rmv_Terms=c("limited trading", "informa uk", "uk limited", "media llc")
-Rmv_Terms=c("results","review","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose","article","human","female","male")
-
-
-INN_THEMATIC=thematicMap(
-  ENTINN,
-  field = "AB",
-  n = 1000,
-  minfreq = 10,
-  ngrams = 2,
-  stemming = FALSE,
-  size = 0.1,
-  n.labels = 10,
-  community.repulsion = 0.5,
-  repel = TRUE,
-  remove.terms = Rmv_Terms,
-  synonyms = NULL,
-  cluster = "walktrap"
-)
-
-
-THEME_PLOT=plot(INN_THEMATIC$map)
-
-conv=as.ggplot(THEME_PLOT)
-
-
-
+######################################
+############ Network PLot ############
+######################################
 
 networkPlot(
   INN_THEMATIC,
@@ -108,42 +80,39 @@ networkPlot(
 
 
 
-####################################
+#####################
+### Thematic Map ####
+#####################
 
 
-###################################################
-
-#############################################################################
-
-########################################################################################
-rownames(M) = make.names(M$AU, unique=TRUE)
-
-bibanal=biblioAnalysis(X, sep = ";")
-
-rownames(M)<-NULL
+Rmv_Terms=c("limited trading", "informa uk", "uk limited", "media llc")
+Rmv_Terms=c("results","review","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose","article","human","female","male")
 
 
+INN_THEMATIC=thematicMap(
+  ENTINN,
+  field = "AB",
+  n = 1000,
+  minfreq = 10,
+  ngrams = 2,
+  stemming = FALSE,
+  size = 0.1,
+  n.labels = 10,
+  community.repulsion = 0.5,
+  repel = TRUE,
+  remove.terms = Rmv_Terms,
+  synonyms = NULL,
+  cluster = "walktrap"
+)
 
 
-binet=biblioNetwork( M, analysis="co-occurrences", network = "abstracts", n = NULL, sep = ";", short = FALSE, shortlabel = TRUE, remove.terms = remove_terms, synonyms = NULL )
+THEME_PLOT=plot(INN_THEMATIC$map)
 
-row.names(M)[3414] <- "BICKLEY SJ, 2021a,"
+conv=as.ggplot(THEME_PLOT)
 
-ROWNAMESREFERENCE = as.data.frame(row.names(M))
-#################################################################
-require(dplyr)
-M_AB_FILTERED = M %>% filter(!is.na(AB))
-
-nrow(distinct(M))
-
-M_AB_FILTERED= distinct(M_AB_FILTERED, TI)
-remove_terms=c("authors","comparative study", "controlled study","results","findings","paper","university","copyright","studies","study","aims","scholarly","considers","article","explore","explores","summarize","summarises","highlights","research","literature","reports","explains","purpose","review","discusses","based","examines","propose")
-
-
-AB=as.data.frame(X$AB)
-
-colnames(AB)[1] <- "AB"
-names(combined)[26] <- "TI_TM"
+############################
+##### TERM EXTRACTION ######
+############################
 
 
 M_TI=termExtraction(
@@ -171,64 +140,7 @@ M_AB=termExtraction(
   verbose = TRUE
 )
 
-combined=readRDS(file.choose())
-
-combined=cbind(M_AB,M_TI$TI_TM)
-names(combined)[26] <- "TI_TM"
-
-
-
-
-
-
-bibnet_AB_COcurr=biblioNetwork(
-  M_AB,
-  analysis = "co-occurrences",
-  network = "keywords",
-  n = NULL,
-  sep = ";",
-  short = FALSE,
-  shortlabel = TRUE,
-  remove.terms = NULL,
-  synonyms = NULL
-)
-
-
-combined=cbind(M_AB,M_TI$TI_TM)
-names(combined)[26] <- "TI_TM"
-
-
-saveRDS(combined, file = "combinedRDS.rds")
-combined=readRDS(file.choose())
-vos_plot=networkPlot(
-  bibnet_AB_COcurr,
-  normalize = NULL,
-  n = NULL,
-  degree = NULL,
-  Title = "Plot",
-  type = "auto",
-  label = TRUE,
-  labelsize = 0.1,
-  label.cex = FALSE,
-  label.color = FALSE,
-  label.n = TRUE,
-  halo = FALSE,
-  cluster = "leading_eigen",
-  community.repulsion = 0.1,
-  vos.path = NULL,
-  size = 1,
-  size.cex = FALSE,
-  curved = TRUE,
-  noloops = TRUE,
-  remove.multiple = TRUE,
-  remove.isolates = TRUE,
-  weighted = TRUE,
-  edgesize = 1,
-  edges.min = 2,
-  alpha = 0.5,
-  verbose = TRUE
-)
-
+###################################
 
 cple_map=couplingMap(
   combined,
@@ -244,53 +156,6 @@ cple_map=couplingMap(
   n.labels = 1,
   repel = TRUE
 )
-pdf("rplotxxxxx.pdf") 
-
-write_graph(
-  cple_map$net$graph,
-  "c:/Users/fletchem/Documents/pajek",
-  format = c("pajek"))
-
-
-theme_map=thematicMap(
-  combined,
-  field = "AB_TM",
-  n = 50,
-  minfreq = 4,
-  ngrams = 2,
-  stemming = FALSE,
-  size = 0.5,
-  n.labels = 10,
-  repel = TRUE,
-  remove.terms = remove_terms,
-  synonyms = NULL,
-  cluster = "leading_eigen"
-)
-
-
-plotted=plot(cple_map$net$graph)
-dev.off() 
-
-pajek=as.data.frame(cple_map$net$graph_pajek)
-ggsave("graph.pdf", lastwidth = 16, height = 20, units = "in")
-############################################
-# library(dplyr)
-# library(tidyr)
-# combinedtwo %>%
-#   mutate_at(vars(ID,DE), na_if, y = "") %>%
-#   fill(ID,DE)
-# 
-# %>%
-#   group_by(SR) %>%
-#   mutate(condition = row_number())
-
-combinedtwo=data.frame(combined)
-
-combinedtwo <- combinedtwo %>% mutate(ID = ifelse(ID %in% "NA", AB_TM, ID))
-
-combinedtwo$DE <- ifelse(is.na(combinedtwo$DE), combined$AB_TM, combinedtwo$DE)
-
-combinedtwo$ID <- ifelse(is.na(combinedtwo$ID), combined$TI_TM, combinedtwo$ID)
 
 
 ##################### sample search string ##############################################################
